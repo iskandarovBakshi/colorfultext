@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colorful Text</title>
+    <style>
+      html {
+        font-family: Arial;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .zen-mode {
+        color: #fff;
+        background-color: #010;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      h1 {
+        letter-spacing: 4px;
+        text-align: center;
+      }
+      :root {
+        --sat: 100%;
+        --lightness: 50%;
+        --delay-between-letters: 0.2;
+        --animation-elements-count: 100;
+      }
+      #colorfultext span {
+        animation-name: colorflow;
+        animation-duration: 50s;
+        animation-timing-function: ease;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-fill-mode: forwards;
+      }
+      @keyframes colorflow {
+        0% {
+          color: hsl(var(--rand-color0), var(--sat), var(--lightness));
+        }
+        5% {
+          color: hsl(var(--rand-color5), var(--sat), var(--lightness));
+        }
+        10% {
+          color: hsl(var(--rand-color10), var(--sat), var(--lightness));
+        }
+        15% {
+          color: hsl(var(--rand-color15), var(--sat), var(--lightness));
+        }
+        20% {
+          color: hsl(var(--rand-color20), var(--sat), var(--lightness));
+        }
+        25% {
+          color: hsl(var(--rand-color25), var(--sat), var(--lightness));
+        }
+        30% {
+          color: hsl(var(--rand-color30), var(--sat), var(--lightness));
+        }
+        35% {
+          color: hsl(var(--rand-color35), var(--sat), var(--lightness));
+        }
+        40% {
+          color: hsl(var(--rand-color40), var(--sat), var(--lightness));
+        }
+        45% {
+          color: hsl(var(--rand-color45), var(--sat), var(--lightness));
+        }
+        50% {
+          color: hsl(var(--rand-color50), var(--sat), var(--lightness));
+        }
+        55% {
+          color: hsl(var(--rand-color55), var(--sat), var(--lightness));
+        }
+        60% {
+          color: hsl(var(--rand-color60), var(--sat), var(--lightness));
+        }
+        65% {
+          color: hsl(var(--rand-color65), var(--sat), var(--lightness));
+        }
+        70% {
+          color: hsl(var(--rand-color70), var(--sat), var(--lightness));
+        }
+        75% {
+          color: hsl(var(--rand-color75), var(--sat), var(--lightness));
+        }
+        80% {
+          color: hsl(var(--rand-color80), var(--sat), var(--lightness));
+        }
+        85% {
+          color: hsl(var(--rand-color85), var(--sat), var(--lightness));
+        }
+        90% {
+          color: hsl(var(--rand-color90), var(--sat), var(--lightness));
+        }
+        95% {
+          color: hsl(var(--rand-color95), var(--sat), var(--lightness));
+        }
+        100% {
+          color: hsl(var(--rand-color100), var(--sat), var(--lightness));
+        }
+      }
+    </style>
+  </head>
+  <body class="zen-mode">
+    <h1 id="colorfultext">Crispum Chips tasty sit amet nasty dolor premium!</h1>
+
+    <script>
+      // utility functions!
+      function getRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+      function getRootVariable(key) {
+        return window
+          .getComputedStyle(document.documentElement)
+          .getPropertyValue(key);
+      }
+      // utility functions end!
+
+      const colorfultext = document.querySelector("#colorfultext");
+      const letters = colorfultext.innerHTML.trim().split("");
+      const delayBetweenLetters = getRootVariable("--delay-between-letters");
+      const animationelementsCount = getRootVariable(
+        "--animation-elements-count"
+      );
+      const totalDelayTime = delayBetweenLetters * animationelementsCount;
+
+      colorfultext.innerHTML = "";
+      letters.forEach((letter, index) => {
+        const span = document.createElement("span");
+        span.innerHTML = letter;
+        span.style.animationDelay = `${
+          index * delayBetweenLetters - totalDelayTime
+        }s`;
+        colorfultext.appendChild(span);
+      });
+
+      for (let i = 0; i <= 100; i += 5) {
+        document.documentElement.style.setProperty(
+          `--rand-color${i}`,
+          getRandom(0, 365)
+        );
+      }
+    </script>
+  </body>
+</html>
